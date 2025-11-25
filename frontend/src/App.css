@@ -1,0 +1,63 @@
+.App {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  /* text-align: center; */
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.btn {
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  border: none;
+  background-color: #007acc;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  gap: 20px;
+}
+
+.btn:hover {
+  background-color: #c586c0;
+  color: white;
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.6);
+}
+
+.btn span {
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.btn span:after {
+  content: "\00bb";
+  position: absolute;
+  opacity: 0;
+  right: -20px;
+  transition: 0.5s;
+}
+
+.btn:hover span {
+  padding-right: 25px;
+}
+
+.btn:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.screen-container {
+  display: flex;
+  flex-direction: column;
+}
