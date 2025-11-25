@@ -1,7 +1,7 @@
 export const config = {
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  server: process.env.DB_SERVER,
+  user: 'myuser',
+  password: '12341234',
+  server: '192.168.1.3',
   port: 1433,
   database: 'RAPPHIM',
   options: {
