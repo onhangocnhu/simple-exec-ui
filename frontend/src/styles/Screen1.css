@@ -1,30 +1,25 @@
-.screen-container {
+/* .screen-container {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
-  /* Font chữ giống code */
   max-width: 500px;
   margin: 20px auto;
   background-color: #1e1e1e;
-  /* Màu nền tối giống VS Code */
   color: #d4d4d4;
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Khi có kết quả => chia thành 2 cột */
 .screen-container.with-result {
   display: flex;
   flex-direction: row;
   gap: 30px;
-  max-width: 1000px;
+  max-width: 100vw;
 }
 
-/* Bên trái */
 .left-panel {
   flex: 1;
 }
 
-/* Bên phải */
 .right-panel {
   display: flex;
   justify-content: center;
@@ -54,7 +49,6 @@
   outline: none;
 }
 
-/* Phần Code Editor */
 .code-editor {
   background-color: #1e1e1e;
   padding: 10px;
@@ -72,19 +66,16 @@
   font-weight: bold;
 }
 
-/* Màu tím cho EXEC */
 .proc-name {
   color: #dcdcaa;
   margin-left: 10px;
 }
 
-/* Màu vàng cho tên hàm */
 .param-name {
   color: #9cdcfe;
   min-width: 150px;
 }
 
-/* Màu xanh dương cho tên biến */
 .operator {
   color: #d4d4d4;
   margin-right: 10px;
@@ -95,17 +86,14 @@
   margin-left: 2px;
 }
 
-/* Custom Input trong code */
 .sql-input {
   background: transparent;
   border: none;
   border-bottom: 1px dashed #555;
   color: #ce9178;
-  /* Màu cam đất cho chuỗi string */
   font-family: inherit;
   font-size: 1rem;
   flex: 1;
-  /* Tự động giãn full chiều ngang còn lại */
   padding: 2px 5px;
   min-width: 200px;
 }
@@ -136,27 +124,23 @@
   display: flex;
   justify-content: center;
   max-width: 600px;
-  /* Căn bảng vào giữa */
   margin-top: 20px;
   width: 100%;
 }
 
-.result {
+.result-table {
   width: 100%;
   border-collapse: collapse;
   background: white;
-  /* Đổi không còn nền đen */
   color: black;
   table-layout: fixed;
-  /* Giúp xuống dòng */
 }
 
-.result th,
-.result td {
+.result-table th,
+.result-table td {
   border: 1px solid #444;
   padding: 8px;
   word-wrap: break-word;
-  /* Cho phép xuống dòng */
 }
 
 .toggle-bar {
@@ -176,4 +160,212 @@
 
 .btn-toggle:hover {
   background: #666;
+} */
+
+
+/* Root container cho Screen1 – giống style tổng thể bên Showtimes */
+.screen-container {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  padding: 16px;
+  margin: 16px;
+  background-color: #ffe1e1;
+  color: #222;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+}
+
+/* Khi có bảng kết quả thì chia 2 panel giống showtimes */
+.screen-container.with-result {
+  display: flex;
+  gap: 16px;
+}
+
+/* Panel bên trái: phần EXEC + input */
+.left-panel {
+  max-width: 380px;
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+  padding-left: 4px;
+  overflow-y: auto;
+}
+
+/* Panel bên phải: bảng kết quả */
+.right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-left: 12px;
+  overflow: hidden;
+}
+
+/* Nhóm control giống control-panel1 bên showtimes */
+.control-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-group label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+/* Input bên dưới label (nếu có dùng control-group + input/select) */
+.control-group input,
+.control-group select {
+  padding: 4px 6px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* “Code editor” – nhưng nền trắng cho đồng bộ */
+.code-editor {
+  background-color: #ffffff;
+  border-radius: 4px;
+  padding: 8px;
+  border: 1px solid #eee;
+}
+
+/* Mỗi dòng EXEC ... */
+.line {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  font-family: "Consolas", "Monaco", "Courier New", monospace;
+  font-size: 13px;
+}
+
+/* EXEC màu tím nhạt nhẹ */
+.keyword {
+  color: #ff0000;
+  font-weight: 600;
+}
+
+/* Tên stored procedure màu vàng nhạt */
+.proc-name {
+  color: #000000;
+  margin-left: 6px;
+}
+
+/* Tên param */
+.param-name {
+  color: #242424;
+  min-width: 150px;
+}
+
+/* Dấu = */
+.operator {
+  color: #333;
+  margin: 0 6px;
+}
+
+/* Dấu phẩy sau param */
+.comma {
+  color: #555;
+  margin-left: 2px;
+}
+
+/* Input giá trị param trong “code” */
+.sql-input {
+  background: #ffffff;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #c7254e;
+  font-family: inherit;
+  font-size: 13px;
+  padding: 2px 6px;
+  min-width: 180px;
+}
+
+.sql-input::placeholder {
+  color: #999;
+}
+
+.sql-input:focus {
+  outline: none;
+  border-color: #e62a2a;
+  /* cùng tông nút run bên showtimes */
+  box-shadow: 0 0 0 1px rgba(230, 42, 42, 0.1);
+}
+
+/* Nút RUN – style gần giống showtimes .btn-run */
+.btn-run {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: #ffffff;
+  background: #e62a2a;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+.btn-run:hover {
+  background: #c92020;
+}
+
+/* Thanh toggle ẩn/hiện bảng kết quả */
+.toggle-bar {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.btn-toggle {
+  background: #e62a2a;
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  border: 1px solid #ccc;
+  font-size: 12px;
+}
+
+.btn-toggle:hover {
+  background: #fb5959;
+}
+
+/* Container của bảng kết quả – gần giống showtimes .table-container1 */
+.table-container {
+  flex: 1;
+  min-height: 140px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+  overflow: auto;
+  background: #fff;
+}
+
+/* Bảng kết quả của Screen1 */
+.result-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.result-table th,
+.result-table td {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.result-table thead {
+  position: sticky;
+  top: 0;
+  background: #f5f5f5;
+  z-index: 1;
 }

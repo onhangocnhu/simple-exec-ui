@@ -20,7 +20,7 @@
 .btn {
   font-family: "Consolas", "Monaco", "Courier New", monospace;
   border: none;
-  background-color: #007acc;
+  background-color: #e62a2a;
   color: white;
   padding: 10px;
   border-radius: 10px;
@@ -60,4 +60,6 @@
 .screen-container {
   display: flex;
   flex-direction: column;
+  background-color: #ffe1e1;
+  height: 100vh;
 }

@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import "../styles/Screen1.css";
 
-export const Screen1 = () => {
+// export const Screen1 = () => {
+export const Screen1 = (
+  { initialAction = "insert", initialTable = "PHIM", initialInputValues = {} } = {}
+) => {
   // --- 1. KHAI BÁO CẤU HÌNH DỮ LIỆU (CONFIG) ---
 
   // Danh sách tham số cơ bản của PHIM (dùng cho Insert)
@@ -28,16 +31,33 @@ export const Screen1 = () => {
   ];
 
   // --- 2. STATE MANAGEMENT ---
-  const [action, setAction] = useState("insert"); // insert, update, delete
-  const [table, setTable] = useState("PHIM"); // PHIM, TAIKHOAN
-  const [inputValues, setInputValues] = useState({}); // Lưu giá trị người dùng nhập
+  // const [action, setAction] = useState("insert"); // insert, update, delete
+  // const [table, setTable] = useState("PHIM"); // PHIM, TAIKHOAN
+  // const [inputValues, setInputValues] = useState({}); // Lưu giá trị người dùng nhập
   const [queryResult, setQueryResult] = useState(null);
   const [showInputs, setShowInputs] = useState(false);
 
+  const [action, setAction] = useState(initialAction); // insert, update, delete
+  const [table, setTable] = useState(initialTable);   // PHIM, TAIKHOAN
+  const [inputValues, setInputValues] = useState(() =>
+    initialInputValues && Object.keys(initialInputValues).length > 0
+      ? initialInputValues
+      : {}
+  );
   // Reset input khi đổi bảng hoặc đổi hành động
+  // useEffect(() => {
+  //   setInputValues({});
+  // }, [action, table]);
+
+  // Reset input khi đổi bảng hoặc đổi hành động
+  // Reset input khi người dùng tự đổi bảng hoặc hành động
   useEffect(() => {
-    setInputValues({});
-  }, [action, table]);
+    // Chỉ reset khi action/table khác với giá trị ban đầu
+    if (action !== initialAction || table !== initialTable) {
+      setInputValues({});
+    }
+  }, [action, table, initialAction, initialTable]);
+
 
   // --- 3. LOGIC XỬ LÝ ---
 
@@ -179,7 +199,7 @@ export const Screen1 = () => {
                     <span className="param-name">{param.name}</span>
                     <span className="operator"> = </span>
                     <input
-                      type="text"
+                      type={param.name.includes("Ngay") ? "date" : "text"}
                       className="sql-input"
                       placeholder={param.placeholder}
                       value={inputValues[param.name] || ""}
@@ -197,7 +217,7 @@ export const Screen1 = () => {
       </div>
 
       {/* RIGHT PANEL (TABLE) */}
-      {queryResult && (
+      {/* {queryResult && (
         <div className="right-panel">
           <div className="table-container">
             <table className="result">
@@ -221,7 +241,7 @@ export const Screen1 = () => {
             </table>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
