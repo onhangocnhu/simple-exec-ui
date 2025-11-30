@@ -1,0 +1,17 @@
+.header-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+.app-title {
+  background: #e62a2a;
+  color: #ffffff;
+  text-align: center;
+  font-size: 24px;
+  font-weight: 700;
+  padding: 12px 24px;
+  border-radius: 8px;
+  letter-spacing: 1px;
+}
