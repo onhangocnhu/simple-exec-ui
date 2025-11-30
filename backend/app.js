@@ -19,7 +19,6 @@ app.post("/execute", async (req, res) => {
     for (const key of Object.keys(params)) {
       const cleanName = key.replace("@", "");
       const value = params[key];
-      // Nếu FE gửi "", tức là user muốn bỏ qua field → NULL
       const fixedValue = (value === "" || value === undefined) ? null : value;
 
       request.input(cleanName, fixedValue);
@@ -28,16 +27,16 @@ app.post("/execute", async (req, res) => {
     // Gọi PROCEDURE
     const execResult = await request.execute(procName);
 
-    // Nếu procedure không lỗi → lấy danh sách bảng
-    const tableResult = await pool
-      .request()
-      .query(`SELECT * FROM ${table}`);
+    // // Nếu procedure không lỗi → lấy danh sách bảng
+    // const tableResult = await pool
+    //   .request()
+    //   .query(`SELECT * FROM ${table}`);
 
     res.json({
       success: true,
       message: "Thực thi stored procedure thành công",
       execResult: execResult.recordset ?? null,
-      data: tableResult.recordset
+      // data: tableResult.recordset
     });
 
   } catch (err) {
