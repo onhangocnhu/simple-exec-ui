@@ -51,7 +51,7 @@ export default function ProfileSearch() {
             </button>
         </div>
 
-        {/* Phần 1: Avatar + Thông tin chi tiết (Nằm ngang) */}
+    
         <div className="user-intro-card">
             <div className="intro-left">
                 <div className="avatar-circle-large">👤</div>
@@ -89,17 +89,16 @@ export default function ProfileSearch() {
             </div>
         </div>
 
-        {/* Phần 2: Các chỉ số thống kê (Stats) */}
         <div className="stats-grid-container">
-           {/* Cột 1: Loại thẻ */}
+         
            <div className="stat-card">
               <div className="stat-content">
-                  <span className="stat-label">Cấp độ thẻ</span>
+                  <span className="stat-label">Hạng thành viên</span> /*Fix*/
                   <div className="rank-badge">{profileData.rank}</div>
               </div>
            </div>
 
-           {/* Cột 2: Tổng chi tiêu */}
+          
            <div className="stat-card">
               <div className="stat-content">
                   <span className="stat-label">Tổng Chi Tiêu</span>
@@ -107,7 +106,7 @@ export default function ProfileSearch() {
               </div>
            </div>
 
-           {/* Cột 3: Điểm tích lũy */}
+   
            <div className="stat-card">
               <div className="stat-content">
                   <span className="stat-label">Điểm tích lũy</span>
@@ -115,7 +114,7 @@ export default function ProfileSearch() {
               </div>
            </div>
 
-           {/* Cột 4: Thẻ thành viên */}
+        
            <div className="stat-card">
               <div className="stat-content">
                         <span className="stat-label">Thẻ thành viên</span>

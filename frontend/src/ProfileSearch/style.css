@@ -1,10 +1,10 @@
 /* --- CẤU HÌNH CHUNG --- */
 :root {
-  --primary-red: #e71a0f;   /* Màu đỏ đặc trưng CGV */
-  --bg-cream: #fdfcf0;      /* Màu nền kem nhẹ */
-  --text-dark: #222222;     /* Màu chữ đen */
-  --text-gray: #666666;     /* Màu chữ xám */
-  --border-color: #cccccc;  /* Màu viền */
+  --primary-red: #e71a0f;  
+  --bg-cream: #fdfcf0;     
+  --text-dark: #222222;    
+  --text-gray: #666666;    
+  --border-color: #cccccc; 
 }
 
 * {
@@ -18,9 +18,9 @@ body {
   padding: 0;
 }
 
-/* =========================================
+/*
    PHẦN 1: LOGIN FORM / TRA CỨU
-   ========================================= */
+  */
 
 .login-wrapper {
   background-color: var(--bg-cream);
@@ -49,7 +49,7 @@ body {
   cursor: default;
 }
 
-/* Form Container */
+
 .login-form-container {
   padding: 30px;
 }
@@ -109,20 +109,14 @@ body {
   margin-top: 10px;
 }
 
-/* =========================================
-   PHẦN 2: PROFILE PAGE (Trang thông tin)
-   ========================================= */
-
-/* --- PHẦN PROFILE MỚI (RỘNG HƠN) --- */
 
 .profile-container-large {
-  max-width: 1200px; /* Container lớn hơn */
+  max-width: 1200px; 
   width: 95%;
   margin: 40px auto;
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Header Dashboard */
 .dashboard-header {
   display: flex;
   justify-content: space-between;
@@ -156,7 +150,7 @@ body {
   background-color: #c0150c;
 }
 
-/* Card chứa Avatar + Thông tin (User Intro) */
+/*Avatar + Thông tin */
 .user-intro-card {
   display: flex;
   background-color: white;
@@ -166,7 +160,7 @@ body {
   box-shadow: 0 5px 15px rgba(0,0,0,0.05);
   margin-bottom: 30px;
   border-radius: 0 0 8px 8px;
-  gap: 50px; /* Khoảng cách giữa avatar và thông tin */
+  gap: 50px; 
 }
 
 .intro-left {
@@ -203,10 +197,10 @@ body {
   color: #333;
 }
 
-/* Grid thông tin cá nhân */
+/* Thông tin cá nhân */
 .info-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr; /* Chia làm 2 cột */
+  grid-template-columns: 1fr 1fr; 
   gap: 20px 40px;
 }
 
@@ -230,36 +224,35 @@ body {
 }
 
 .card-code {
-  color: #e71a0f; /* Mã thẻ màu đỏ */
+  color: #e71a0f;
   font-family: monospace;
   font-size: 18px;
   letter-spacing: 1px;
 }
 
-/* Grid các ô thống kê (Stats Grid) */
+
 .stats-grid-container {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 cột đều nhau */
+  grid-template-columns: repeat(4, 1fr);
   gap: 20px;
 }
 
 .stat-card {
-  background-color: #fdfcf0; /* Nền kem */
+  background-color: #fdfcf0; 
   border: 1px solid #ddd;
   border-radius: 8px;
   
-  /* --- PHẦN CANH GIỮA --- */
+
   display: flex;
-  flex-direction: column;  /* Xếp dọc: Icon lên trên, chữ xuống dưới */
-  justify-content: center; /* Căn giữa theo chiều dọc */
-  align-items: center;     /* Căn giữa theo chiều ngang */
-  text-align: center;      /* Căn giữa văn bản */
-  
-  /* Sửa lỗi chính tả: '20 px' -> '20px' */
+  flex-direction: column;  
+  justify-content: center; 
+  align-items: center;     
+  text-align: center;     
+ 
   padding: 25px 20px; 
   gap: 15px;
   transition: transform 0.2s, box-shadow 0.2s;
-  height: 100%; /* Để các ô cao bằng nhau */
+  height: 100%; 
 }
 
 
