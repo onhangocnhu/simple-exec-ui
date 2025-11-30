@@ -1,0 +1,224 @@
+/* Root layout của màn suất chiếu */
+.showtimes-screen {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  box-sizing: border-box;
+  height: calc(100vh - 80px);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+}
+
+/* Panel bên trái: form lọc / báo cáo */
+.showtimes-left-panel {
+  flex: 0 0 360px;
+  max-width: 380px;
+  border-right: 1px solid #ddd;
+  padding-right: 16px;
+  padding-left: 4px;
+  background-color: #ffe1e1;
+  overflow-y: auto;
+}
+
+.showtimes-left-panel h2,
+.showtimes-left-panel h3 {
+  margin: 8px 0;
+  font-size: 16px;
+}
+
+.control-panel1 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.control-group1 {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.control-group1 label {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.control-group1 input,
+.control-group1 select {
+  padding: 4px 6px;
+  font-size: 13px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.btn-run,
+.showtimes-left-panel button {
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  color: white;
+  background: #e62a2a;
+  cursor: pointer;
+}
+
+.btn-run:hover,
+.showtimes-left-panel button:hover {
+  background: #e9e9e9;
+}
+
+/* Panel bên phải: chứa các bảng */
+.showtimes-right-panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow: hidden;
+}
+
+.showtimes-right-panel h3 {
+  margin: 0;
+  font-size: 15px;
+}
+
+/* Container bao bảng */
+.showtimes-screen .table-container1 {
+  flex: 1;
+  min-height: 160px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px;
+  box-sizing: border-box;
+  overflow: auto;
+  background: #fff;
+}
+
+/* Style bảng kết quả */
+.showtimes-screen table.result1 {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+.showtimes-screen table.result1 th,
+.showtimes-screen table.result1 td {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  text-align: left;
+  white-space: nowrap;
+}
+
+.showtimes-screen table.result1 thead {
+  position: sticky;
+  top: 0;
+  background: #f5f5f5;
+  z-index: 1;
+}
+
+.showtimes-screen tr.row-selected {
+  background-color: #fda7a7;
+  /* xám xám */
+}
+
+/* Đoạn text nhỏ nhỏ */
+.section-title {
+  margin-top: 8px;
+}
+
+/* ================== MỚI THÊM ================== */
+
+/* Thanh chọn form (Tra cứu / Báo cáo) */
+.mode-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.mode-toggle button {
+  flex: 1;
+  padding: 6px 10px;
+  font-size: 13px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.mode-toggle button.active {
+  background: #e0e0e0;
+  font-weight: 600;
+}
+
+/* Nút ẩn/hiện bảng */
+.table-header-actions {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 8px;
+}
+
+.table-header-actions button {
+  padding: 4px 8px;
+  font-size: 12px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+.table-header-actions button:hover {
+  background: #e9e9e9;
+}
+
+/* Modal hiển thị Screen1 cho UPDATE / DELETE PHIM */
+.showtimes-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.showtimes-modal {
+  background: #ffffff;
+  border-radius: 8px;
+  max-width: 960px;
+  width: 90%;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.showtimes-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+}
+
+.showtimes-modal-header h3 {
+  margin: 0;
+  font-size: 16px;
+}
+
+.showtimes-modal-header button {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+}
+
+.showtimes-modal-body {
+  padding: 8px 12px;
+  overflow: auto;
+}
+
+.showtimes-modal-body p {
+  margin-bottom: 8px;
+  font-size: 13px;
+}
