@@ -446,6 +446,13 @@ import { useState } from "react";
 import { Screen1 } from "./Screen1";
 import "../styles/ShowtimesScreen.css";
 
+const formatDate = (value) => {
+  if (!value) return "";
+  const d = new Date(value);
+  if (Number.isNaN(d.getTime())) return value; // nếu không parse được thì trả lại string raw
+  return d.toLocaleDateString("vi-VN");
+};
+
 export const ShowtimesScreen = () => {
   // ---------- STATE CHO TRA CỨU LỊCH CHIẾU ----------
   const [tenPhim, setTenPhim] = useState("");
@@ -722,7 +729,7 @@ export const ShowtimesScreen = () => {
         {/* BẢNG SUẤT CHIẾU */}
         <h3>Danh sách SUẤT CHIẾU</h3>
 
-        {processedShowtimes.length > 0 ? (
+        {showtimes.length > 0 ? (
           <>
             <div className="control-panel1">
               <div className="control-group1">
@@ -772,20 +779,32 @@ export const ShowtimesScreen = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  {processedShowtimes.map((row, idx) => {
-                    const isSelected = selectedRow === row;
-                    return (
-                      <tr
-                        key={idx}
-                        onClick={() => handleSelectRow(row)}
-                        className={isSelected ? "row-selected" : ""}
-                      >
-                        {showtimeColumns.map((col) => (
-                          <td key={col}>{String(row[col])}</td>
-                        ))}
-                      </tr>
-                    );
-                  })}
+                  {processedShowtimes.length > 0 ? (
+                    processedShowtimes.map((row, idx) => {
+                      const isSelected = selectedRow === row;
+                      return (
+                        <tr
+                          key={idx}
+                          onClick={() => handleSelectRow(row)}
+                          className={isSelected ? "row-selected" : ""}
+                        >
+                          {showtimeColumns.map((col) => (
+                            <td key={col}>
+                              {["NgayChieu", "ThoiGianBatDau", "ThoiGianKetThuc"].includes(col)
+                                ? formatDate(row[col])
+                                : row[col]}
+                            </td>
+                          ))}
+                        </tr>
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td colSpan={showtimeColumns.length} style={{ textAlign: "center", fontStyle: "italic" }}>
+                        Không có dòng nào khớp với từ khóa tìm kiếm.
+                      </td>
+                    </tr>
+                  )}
                 </tbody>
               </table>
             </div>

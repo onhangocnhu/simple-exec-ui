@@ -3,6 +3,7 @@ import { Screen1 } from "./Screen1";
 import { ShowtimesScreen } from "./ShowtimesScreen";
 import ProfileSearch from "../ProfileSearch/ProfileForm";
 import '../styles/Header.css';
+import ViewMovies from "./ViewMovies";
 
 export const Header = () => {
   const [activeScreen, setActiveScreen] = useState(null);
@@ -11,7 +12,7 @@ export const Header = () => {
   return (
     <div className="header-wrapper">
       <div className="app-title">
-        RẠP CHIẾU PHIM
+        RẠP CHIẾU PHIM CINEMARS
       </div>
 
       <div className="header-container">
@@ -45,10 +46,21 @@ export const Header = () => {
           >
             <span>Xem thông tin khách hàng</span>
           </button>
+
+          <button
+            className="btn"
+            onClick={() => {
+              setViewProfileForm(false);
+              setActiveScreen('movies');
+            }}
+          >
+            <span>Danh sách phim ở rạp CineMars</span>
+          </button>
         </div>
 
         {activeScreen === "crud" && <Screen1 />}
         {activeScreen === "showtimes" && <ShowtimesScreen />}
+        {activeScreen === "movies" && <ViewMovies />}
         {viewProfileForm ? <ProfileSearch /> : null}
       </div>
     </div>

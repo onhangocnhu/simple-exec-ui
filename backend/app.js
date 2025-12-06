@@ -137,6 +137,42 @@ app.post("/check-profile", async (req, res) => {
 });
 
 
+app.get("/movies", async (req, res) => {
+  try {
+    const pool = await sql.connect(config);
+
+    const result = await pool.request()
+      .query(`
+                SELECT 
+                    P.MaPhim, 
+                    P.TenPhim, 
+                    P.DoTuoiQuyDinh,
+                    P.DaoDien,
+                    P.NgayKhoiChieu,
+                    P.NgayNgungChieu,
+                    P.ThoiLuong,
+                    P.QuocGiaSanXuat,
+                    P.NamSanXuat,
+                    P.TinhTrang
+                FROM PHIM AS P
+            `);
+
+    if (result.recordset.length === 0) {
+      return res.json({ success: false, message: "Không có phim nào trong hệ thống" });
+    }
+
+    res.json({
+      success: true,
+      message: "Lấy thông tin phim thành công",
+      data: result.recordset
+    });
+
+  } catch (err) {
+    console.error("Lỗi Server:", err);
+    res.status(500).json({ success: false, message: "Lỗi hệ thống: " + err.message });
+  }
+});
+
 // Chạy server
 app.listen(3001, () =>
   console.log("Backend is running on port 3001")
