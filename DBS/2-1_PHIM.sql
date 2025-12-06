@@ -6,9 +6,6 @@
     -- Lỗi thời gian không hợp lệ: 4
     -- Lỗi định dạng dữ liệu: 5
     -- Lỗi dữ liệu không tồn tại: 6
-
-SET NOCOUNT ON;
-
 /*================================ INSERT ======================================== */
 
 CREATE OR ALTER PROCEDURE sp_validate_insert_PHIM (
@@ -27,7 +24,8 @@ CREATE OR ALTER PROCEDURE sp_validate_insert_PHIM (
 )  
 AS
 BEGIN
-   -- Kiểm tra tên phim không trống
+    SET NOCOUNT ON;
+    -- Kiểm tra tên phim không trống
     IF @p_TenPhim IS NULL OR LTRIM(RTRIM(@p_TenPhim)) = ''
     BEGIN
         RAISERROR (N'Lỗi dữ liệu trống: Tên phim không được để trống!', 11, 2);
@@ -131,6 +129,7 @@ CREATE OR ALTER PROCEDURE sp_validate_update_PHIM (
 )  
 AS
 BEGIN
+    SET NOCOUNT ON;
     -- Kiểm tra tồn tại mã phim
     IF NOT EXISTS (
         SELECT 1
@@ -248,6 +247,8 @@ CREATE OR ALTER PROCEDURE sp_validate_delete_PHIM
     @p_MaPhim VARCHAR(10)
 AS
 BEGIN
+    SET NOCOUNT ON;
+
     DECLARE @v_count INT;
 
     SELECT @v_count = COUNT(*)

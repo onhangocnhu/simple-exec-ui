@@ -5,9 +5,6 @@
     -- Lỗi dữ liệu <= 0: 3
     -- Lỗi thời gian không hợp lệ: 4
     -- Lỗi định dạng dữ liệu: 5
-
-SET NOCOUNT ON;
-
 /*================================ INSERT ======================================== */
 
 CREATE OR ALTER PROCEDURE sp_validate_insert_TAIKHOAN
@@ -16,6 +13,7 @@ CREATE OR ALTER PROCEDURE sp_validate_insert_TAIKHOAN
     @p_MatKhau VARCHAR(255)
 AS
 BEGIN
+    SET NOCOUNT ON;
     -- Kiểm tra NULL
     IF @p_TenDangNhap IS NULL OR LTRIM(RTRIM(@p_TenDangNhap)) = ''
     BEGIN
@@ -106,9 +104,6 @@ EXEC sp_validate_insert_TAIKHOAN
     @p_MatKhau = 'Nhu123456*'
 GO
 
-SELECT *
-FROM TAIKHOAN
-
 /*================================ UPDATE ======================================== */
 
 CREATE OR ALTER PROCEDURE sp_validate_update_TAIKHOAN
@@ -118,6 +113,8 @@ CREATE OR ALTER PROCEDURE sp_validate_update_TAIKHOAN
     @p_MatKhau VARCHAR(255)
 AS
 BEGIN
+    SET NOCOUNT ON;
+
     -- Kiểm tra NULL
     IF @p_MaTaiKhoan IS NULL OR LTRIM(RTRIM(@p_MaTaiKhoan)) = ''
     BEGIN
@@ -236,6 +233,8 @@ CREATE OR ALTER PROCEDURE sp_validate_delete_TAIKHOAN
     @p_MaTaiKhoan VARCHAR(10)
 AS
 BEGIN
+    SET NOCOUNT ON;
+
     DECLARE @v_count INT;
 
     SELECT @v_count = COUNT(*)
