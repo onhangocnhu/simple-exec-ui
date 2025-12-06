@@ -184,6 +184,7 @@ CREATE TABLE VOUCHER (
     QuaTang NVARCHAR(100),
     GioiHanMoiNguoi INT DEFAULT 1, -- Thêm
     ChiDanhChoThanhVien BIT DEFAULT 0,  -- Thêm
+    SoDiemQuyDoi INT NOT NULL DEFAULT 0, 
 
     -- Đảm bảo ít nhất 1 trong 3 cột này phải có giá trị
     CONSTRAINT Voucher_CoGiaTri
@@ -193,8 +194,8 @@ CREATE TABLE VOUCHER (
         CHECK (SoLuong >= 0),
     -- Ràng buộc ngày kết thúc phải sau ngày bắt đầu
     CONSTRAINT CK_NgayKetThuc
-        CHECK (NgayKetThuc > NgayBatDau)
-
+        CHECK (NgayKetThuc > NgayBatDau),
+    CONSTRAINT CK_VOUCHER_SoDiemQuyDoi CHECK (SoDiemQuyDoi >= 0)
 );
 GO
 

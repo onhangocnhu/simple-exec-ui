@@ -307,17 +307,23 @@ INSERT INTO SUATCHIEU (MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, T
 
 GO
 
-INSERT INTO VOUCHER (SoLuong, NgayBatDau, NgayKetThuc, PhamViApDung, GiaTriGiamToiDa, PhanTram, GiaTri, QuaTang) VALUES
-( 100, '2025-01-01', '2025-12-31', N'TOANBO', 50000, 10, NULL, NULL), -- %: Có, Tiền: NULL
-( 50, '2025-11-01', '2025-11-30', N'RAP:RAP0000001', NULL, NULL, 20000, NULL), -- %: NULL, Tiền: Có
-( 20, '2025-01-01', '2026-01-01', N'LOAIGHE:VIP', NULL, NULL, NULL, N'Bắp'), -- Qùa: Có
-(200, '2024-03-01', '2025-06-01', N'PHIM:P000000002', 30000, 15, NULL, NULL),
-( 500, '2025-01-01', '2025-12-31', N'SANPHAM:SPK0000001', NULL, NULL, 15000, NULL),
-( 1000, '2025-01-01', '2026-01-01', N'NGAY:T3', 50000, 50, NULL, NULL),
-( 50, '2025-12-20', '2025-12-31', N'TOANBO', NULL, NULL, 50000, NULL),
-( 100, '2025-01-01', '2025-12-31', N'LOAIGHE:Đôi', 100000, 20, NULL, NULL),
-( 10, '2025-12-24', '2025-12-25', N'TOANBO', NULL, NULL, NULL, N'Gấu'),
-( 300, '2025-01-01', '2025-06-30', N'RAP:RAP0000003', NULL, NULL, 30000, NULL);
+INSERT INTO VOUCHER (SoLuong, NgayBatDau, NgayKetThuc, PhamViApDung, GiaTriGiamToiDa, PhanTram, GiaTri, QuaTang, SoDiemQuyDoi) VALUES
+(100, '2025-01-01', '2025-12-31', N'TOANBO', 50000, 10, NULL, NULL, 0),
+(50,  '2025-11-01', '2025-11-30', N'RAP:RAP0000001', NULL, NULL, 20000, NULL, 0),
+(20,  '2025-01-01', '2026-01-01', N'LOAIGHE:VIP', NULL, NULL, NULL, N'Bắp', 0),
+(200, '2024-03-01', '2025-06-01', N'PHIM:P000000002', 30000, 15, NULL, NULL, 0),
+(500, '2025-01-01', '2025-12-31', N'SANPHAM:SPK0000001', NULL, NULL, 15000, NULL, 0),
+(1000,'2025-01-01', '2026-01-01', N'NGAY:T3', 50000, 50, NULL, NULL, 0),
+(50,  '2025-12-20', '2025-12-31', N'TOANBO', NULL, NULL, 50000, NULL, 0),
+(100, '2025-01-01', '2025-12-31', N'LOAIGHE:Đôi', 100000, 20, NULL, NULL, 0),
+(10,  '2025-12-24', '2025-12-25', N'TOANBO', NULL, NULL, NULL, N'Gấu', 0),
+(300, '2025-01-01', '2025-06-30', N'RAP:RAP0000003', NULL, NULL, 30000, NULL, 0),
+-- VOUCHER ĐỔI ĐIỂM (DÙNG CHO TRIGGER)
+(200, '2025-01-01','2025-12-31', N'TOANBO', NULL, NULL, 20000, NULL, 100),
+(100, '2025-01-01','2025-12-31', N'LOAIGHE:VIP', NULL, NULL, 20000, NULL, 150),
+(50,  '2025-01-01','2025-12-31', N'PHIM:P000000002', 80000, 10, NULL, NULL, 200);
+GO
+
 
 INSERT INTO SANPHAMKEM (TenSanPham, LoaiSanPham, MoTa, DonGia) VALUES
 ( N'Bắp Ngọt', N'Bắp', N'Size L', 60000), ( N'Coca', N'Nước', N'Size L', 35000),
@@ -339,6 +345,9 @@ INSERT INTO CHONGOI (MaRap, SoThuTuPhong, SoThuTuCho, Da_y, LoaiGhe, TrangThai) 
 ('RAP0000001', 1, 7, 'A', N'Thường', N'Sẵn sàng'),
 ('RAP0000001', 1, 8, 'A', N'Thường', N'Sẵn sàng'),
 ('RAP0000001', 1, 9, 'A', N'Thường', N'Sẵn sàng'),
+('RAP0000001', 1, 10, 'A', N'Thường', N'Sẵn sàng'),
+('RAP0000001', 1, 11, 'A', N'Thường', N'Sẵn sàng'),
+('RAP0000001', 1, 12, 'A', N'Thường', N'Sẵn sàng'),
 
 -- 2. Phòng R01 - P1 (Phòng 2D): Hàng E ghế VIP
 ('RAP0000001', 1, 5, 'E', N'VIP', N'Sẵn sàng'),
@@ -416,9 +425,9 @@ VALUES ('GD00000001', 'VC00000007');
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Ví điện tử', 0, '2025-11-22', '10:00:00'); 
 INSERT INTO GIAODICHTRUCTUYEN ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES 
-('GD00000011', '0000000001', NULL, NULL);
+('GD00000002', '0000000001', NULL, NULL);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000011', 'P000000001', 'RAP0000001', 1, '2025-11-20', '09:00:00', 'RAP0000001', 1, 1, 'A');
+(N'Thường', N'Đã chọn', NULL, 'GD00000002', 'P000000001', 'RAP0000001', 1, '2025-11-20', '09:00:00', 'RAP0000001', 1, 1, 'A');
 --
 
 UPDATE GIAODICH SET 
@@ -435,99 +444,123 @@ WHERE MaGiaoDich = 'GD00000001';
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Ví điện tử', 0, '2025-11-19', '16:00:00'); 
 INSERT INTO GIAODICHTRUCTUYEN ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES 
-('GD00000002', '0000000003', 10, 5);
+('GD00000003', '0000000003', 10, 5);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000002', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 4, 'A'),
-(N'Thường', N'Đã chọn', NULL, 'GD00000002', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 5, 'A'),
-(N'Thường', N'Đã chọn', NULL, 'GD00000002', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 6, 'A');
+(N'Thường', N'Đã chọn', NULL, 'GD00000003', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 4, 'A'),
+(N'Thường', N'Đã chọn', NULL, 'GD00000003', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 5, 'A'),
+(N'Thường', N'Đã chọn', NULL, 'GD00000003', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 6, 'A');
 INSERT INTO MUAKEM (MaGiaoDich, MaSanPham, SoLuong)
-VALUES ('GD00000002', 'SPK0000001', 1);
+VALUES ('GD00000003', 'SPK0000001', 1);
 INSERT INTO APDUNG (MaGiaoDich, MaVoucher) 
-VALUES ('GD00000002', 'VC00000007'); 
+VALUES ('GD00000003', 'VC00000007'); 
 
 --GD03
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Ví điện tử', 0, '2025-11-18', '23:49:26'); 
 INSERT INTO GIAODICHTRUCTUYEN ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES 
-('GD00000003', '0000000003', 10, 4);
+('GD00000004', '0000000003', 10, 4);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Đôi', N'Đã chọn', NULL, 'GD00000003', 'P000000003', 'RAP0000003', 1, '2025-11-21', '10:00:00', 'RAP0000003', 1, 3, 'F');
-
-INSERT INTO MUAKEM (MaGiaoDich, MaSanPham, SoLuong)
-VALUES ('GD00000003', 'SPK0000001', 1);
-INSERT INTO APDUNG (MaGiaoDich, MaVoucher) 
-VALUES ('GD00000003', 'VC00000001'); 
-
---GD04
-INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
-(N'Tiền mặt', 1, '2025-11-20', '14:23:37'); 
-INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
-('GD00000004', NULL, NULL, NULL, 'RAP0000001', 1);
--- ('P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', '16:58:00', N'2D', N'Chưa chiếu', N'Lồng tiếng'),
--- ('RAP0000001', 1, 5, 'E', N'VIP', N'Sẵn sàng'),
-INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'VIP', N'Đã chọn', NULL, 'GD00000004', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 5, 'E');
+(N'Đôi', N'Đã chọn', NULL, 'GD00000004', 'P000000003', 'RAP0000003', 1, '2025-11-21', '10:00:00', 'RAP0000003', 1, 3, 'F');
 
 INSERT INTO MUAKEM (MaGiaoDich, MaSanPham, SoLuong)
 VALUES ('GD00000004', 'SPK0000001', 1);
 INSERT INTO APDUNG (MaGiaoDich, MaVoucher) 
 VALUES ('GD00000004', 'VC00000001'); 
 
---GD05
+--GD04
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
-(N'Ví điện tử', 1, '2025-11-20', '14:23:37'); 
+(N'Tiền mặt', 1, '2025-11-20', '14:23:37'); 
 INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
-('GD00000005', '0000000004', 10, 4, 'RAP0000001', 1);
+('GD00000005', NULL, NULL, NULL, 'RAP0000001', 1);
 -- ('P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', '16:58:00', N'2D', N'Chưa chiếu', N'Lồng tiếng'),
 -- ('RAP0000001', 1, 5, 'E', N'VIP', N'Sẵn sàng'),
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000005', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 4, 'A');
+(N'VIP', N'Đã chọn', NULL, 'GD00000005', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 5, 'E');
 
 INSERT INTO MUAKEM (MaGiaoDich, MaSanPham, SoLuong)
 VALUES ('GD00000005', 'SPK0000001', 1);
 INSERT INTO APDUNG (MaGiaoDich, MaVoucher) 
 VALUES ('GD00000005', 'VC00000001'); 
 
+--GD05
+INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
+(N'Ví điện tử', 1, '2025-11-20', '14:23:37'); 
+INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
+('GD00000006', '0000000004', 10, 4, 'RAP0000001', 1);
+-- ('P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', '16:58:00', N'2D', N'Chưa chiếu', N'Lồng tiếng'),
+-- ('RAP0000001', 1, 5, 'E', N'VIP', N'Sẵn sàng'),
+INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
+(N'Thường', N'Đã chọn', NULL, 'GD00000006', 'P000000001', 'RAP0000001', 1, '2025-11-20', '12:00:00', 'RAP0000001', 1, 4, 'A');
+
+INSERT INTO MUAKEM (MaGiaoDich, MaSanPham, SoLuong)
+VALUES ('GD00000006', 'SPK0000001', 1);
+INSERT INTO APDUNG (MaGiaoDich, MaVoucher) 
+VALUES ('GD00000006', 'VC00000001'); 
+
 --GD06
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Tiền mặt', 1, '2025-11-20', '14:23:37'); 
 INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
-('GD00000006', NULL, NULL, NULL, 'RAP0000001', 1);
+('GD00000007', NULL, NULL, NULL, 'RAP0000001', 1);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000006', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 7, 'A');
+(N'Thường', N'Đã chọn', NULL, 'GD00000007', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 7, 'A');
 
 --GD07
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Tiền mặt', 1, '2025-11-20', '14:23:37'); 
 INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
-('GD00000007', NULL, NULL, NULL, 'RAP0000003', 1);
+('GD00000008', NULL, NULL, NULL, 'RAP0000003', 1);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Đôi', N'Đã chọn', NULL, 'GD00000007', 'P000000003', 'RAP0000003', 1, '2025-11-21', '10:00:00', 'RAP0000003', 1, 2, 'F');
+(N'Đôi', N'Đã chọn', NULL, 'GD00000008', 'P000000003', 'RAP0000003', 1, '2025-11-21', '10:00:00', 'RAP0000003', 1, 2, 'F');
 
 --GD08
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Tiền mặt', 1, '2025-11-20', '14:23:37'); 
 INSERT INTO GIAODICHTRUCTIEP ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia, MaRap, SoQuay) VALUES 
-('GD00000008', NULL, NULL, NULL, 'RAP0000001', 1);
+('GD00000009', NULL, NULL, NULL, 'RAP0000001', 1);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'VIP', N'Đã chọn', NULL, 'GD00000008', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 6, 'E');
+(N'VIP', N'Đã chọn', NULL, 'GD00000009', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 6, 'E');
 
 --GD09
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Ví điện tử', 0, '2025-11-18', '23:49:26'); 
 INSERT INTO GIAODICHTRUCTUYEN ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES 
-('GD00000009', '0000000006', 10, NULL);
+('GD00000010', '0000000006', 10, NULL);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000009', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 8, 'A');
+(N'Thường', N'Đã chọn', NULL, 'GD00000010', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 8, 'A');
 
 --GD10
 INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES 
 (N'Ví điện tử', 0, '2025-11-18', '23:49:26'); 
 INSERT INTO GIAODICHTRUCTUYEN ( MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES 
-('GD00000010', '0000000007', 10, NULL);
+('GD00000011', '0000000007', 10, NULL);
 INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y) VALUES 
-(N'Thường', N'Đã chọn', NULL, 'GD00000010', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 9, 'A');
+(N'Thường', N'Đã chọn', NULL, 'GD00000011', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 9, 'A');
 
+-- GD11
+INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES (N'Ví điện tử', 0, '2025-12-02', '11:00:00');
+INSERT INTO GIAODICHTRUCTUYEN (MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES ('GD00000012', '0000000001', NULL, NULL);
+INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y)
+VALUES (N'VIP', N'Đã chọn', NULL, 'GD00000012', 'P000000001', 'RAP0000001', 1, '2025-11-20', '15:00:00', 'RAP0000001', 1, 10, 'A');
+INSERT INTO APDUNG (MaGiaoDich, MaVoucher) VALUES ('GD00000012', 'VC00000011');
+
+--GD12
+INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich)
+VALUES (N'Ví điện tử', 0, '2025-12-02', '11:00:00');
+INSERT INTO GIAODICHTRUCTUYEN (MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia)
+VALUES ('GD00000013', '0000000001', NULL, NULL);
+
+INSERT INTO VE (LoaiVe, TrangThai, Gia, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y)
+VALUES (N'VIP', N'Đã chọn', NULL, 'GD00000013', 'P000000001', 'RAP0000001', 1, '2025-11-21', '9:00:00', 'RAP0000001', 1, 11, 'A');
+
+INSERT INTO APDUNG (MaGiaoDich, MaVoucher) VALUES ('GD00000013', 'VC00000012');
+
+--GD13
+INSERT INTO GIAODICH (HinhThucThanhToan, HinhThuc, NgayGiaoDich, GioGiaoDich) VALUES (N'Ví điện tử', 0, '2025-12-03', '12:00:00');
+INSERT INTO GIAODICHTRUCTUYEN (MaGiaoDich, MaTaiKhoanKhachHang, DiemTichLuy, DanhGia) VALUES ('GD00000014', '0000000001', NULL, NULL);
+INSERT INTO VE (LoaiVe, TrangThai, MaGiaoDich, MaPhim, MaRap, SoThuTuPhong, NgayChieu, ThoiGianBatDau, MaRap_ChoNgoi, SoThuTuPhong_ChoNgoi, SoThuTuCho, Da_y)
+VALUES (N'VIP', N'Đã chọn', 'GD00000014', 'P000000001', 'RAP0000001', 1, '2025-11-21', '12:00:00', 'RAP0000001', 1, 12, 'A');
+INSERT INTO APDUNG (MaGiaoDich, MaVoucher) VALUES ('GD00000014', 'VC00000013');
 /* 
 SELECT * FROM TAIKHOAN;
 SELECT * FROM KHACHHANGTHANHVIEN;
